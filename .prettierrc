@@ -1,0 +1,18 @@
+{
+  "semi": false,
+  "tabWidth": 4,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": [
+        "*.html",
+        "*.css"
+      ],
+      "options": {
+        "tabWidth": 2,
+        "singleQuote": false
+      }
+    }
+  ]
+}

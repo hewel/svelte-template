@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "prettier",
+    "plugin:@tivac/svelte/svelte"
+  ],
+  "plugins": [
+    "prettier",
+    "html",
+    "@tivac/svelte"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      4
+    ],
+    "semi": "off",
+    "linebreak-style": "off"
+  }
+}
