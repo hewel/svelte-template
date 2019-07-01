@@ -1,5 +1,5 @@
 <script>
-
+    let hello = 'Hello Svelte!'
 </script>
 
 <style>
@@ -10,6 +10,7 @@
     }
 </style>
 
-<h1>Hello Svelte!</h1>
+<h1>{hello}</h1>
+<input type="text" bind:value={hello}>
 
 <button>Svelte</button>

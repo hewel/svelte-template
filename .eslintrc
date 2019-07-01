@@ -7,20 +7,14 @@
   },
   "extends": [
     "airbnb-base",
-    "plugin:prettier/recommended",
     "prettier",
-    "plugin:@tivac/svelte/svelte"
+    "plugin:prettier/recommended"
   ],
   "plugins": [
     "prettier",
-    "html",
-    "@tivac/svelte"
+    "html"
   ],
   "rules": {
-    "indent": [
-      "error",
-      4
-    ],
     "semi": "off",
     "linebreak-style": "off"
   }

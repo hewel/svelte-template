@@ -7,11 +7,25 @@
     {
       "files": [
         "*.html",
-        "*.css"
+        "*.css",
+        "*.less",
+        "*.scss",
+        "*.config.*"
       ],
       "options": {
         "tabWidth": 2,
-        "singleQuote": false
+        "singleQuote": false,
+        "semi": true
+      }
+    },
+    {
+      "files": [
+        "*.vue",
+        "*.svelte"
+      ],
+      "options": {
+        "tabWidth": 2,
+        "singleQuote": true
       }
     }
   ]
