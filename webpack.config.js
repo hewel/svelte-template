@@ -1,11 +1,16 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ManifestPlugin = require("webpack-manifest-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 const mode = process.env.NODE_ENV || "development";
 const prod = mode === "production";
 
 const pathToMainJs = path.join(__dirname, "src", "main.js");
-// const pathToIndexHtml = path.join(__dirname, 'src', 'index.html')
+const pathToIndexHtml = path.join(__dirname, "public", "/index.html");
+const pathToFavicon = path.join(__dirname, "./public/favicon.png");
 
 module.exports = {
   entry: [pathToMainJs],
@@ -13,34 +18,13 @@ module.exports = {
     extensions: [".mjs", ".js", ".svelte"],
   },
   output: {
-    path: path.resolve(__dirname, "public"),
-    // publicPath: 'public/',
-    filename: "bundle.js",
-    chunkFilename: "[name].[id].js",
+    path: path.resolve(__dirname, "build"),
+    // publicPath: "build/",
+    filename: "[chunkhash].bundle.js",
+    chunkFilename: "[name].[chunkhash].js",
   },
   module: {
     rules: [
-      // {
-      //     test: pathToIndexHtml,
-      //     use: [
-      //         {
-      //             loader: 'file-loader',
-      //             options: {
-      //                 name: '[name].[ext]',
-      //             },
-      //         },
-      //         {
-      //             loader: 'extract-loader',
-      //         },
-      //         {
-      //             loader: 'html-loader',
-      //             options: {
-      //                 minimize: true,
-      //                 attrs: ['img:src', 'link:href'],
-      //             },
-      //         },
-      //     ],
-      // },
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
@@ -48,12 +32,7 @@ module.exports = {
         use: [
           {
             loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"],
-              plugins: ["babel-plugin-emotion"],
-            },
           },
-          "source-map-loader",
         ],
         enforce: "pre",
       },
@@ -68,23 +47,11 @@ module.exports = {
               hotReload: true,
             },
           },
-          "source-map-loader",
         ],
       },
       {
         test: /\.css$/,
         use: [
-          /**
-           * MiniCssExtractPlugin doesn't support HMR.
-           * For developing, use 'style-loader' instead.
-           * */
-          // {
-          //     loader: 'file-loader',
-          //     options: {
-          //         name: 'style.css',
-          //     },
-          // },
-          // 'extract-loader',
           {
             loader: prod ? MiniCssExtractPlugin.loader : "style-loader",
             options: {
@@ -99,12 +66,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //     test: /\.js$/,
-      //     exclude: /(node_modules|bower_components)/,
-      //     use: ['source-map-loader'],
-      //     enforce: 'pre',
-      // },
       {
         test: /\.(png|jpe?g|gif)$/,
         use: [
@@ -124,6 +85,16 @@ module.exports = {
       filename: "style.css",
       chunkFilename: "[name]_[id].css",
     }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: pathToIndexHtml,
+    }),
+    new ManifestPlugin(),
+    new FaviconsWebpackPlugin(pathToFavicon),
   ],
   devtool: prod ? "" : "cheap-module-eval-source-map",
+  devServer: {
+    port: 7453,
+  },
 };

@@ -3,6 +3,7 @@
   "tabWidth": 4,
   "singleQuote": true,
   "trailingComma": "all",
+  "endOfLine": "lf",
   "overrides": [
     {
       "files": [
@@ -10,7 +11,8 @@
         "*.css",
         "*.less",
         "*.scss",
-        "*.config.*"
+        "*.config.*",
+        "*.json"
       ],
       "options": {
         "tabWidth": 2,
