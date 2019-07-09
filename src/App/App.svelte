@@ -1,4 +1,6 @@
 <script>
+  import Title from '../Components/Title'
+
   let hello = 'Hello Svelte!'
   class Time {
     constructor(props) {
@@ -41,6 +43,8 @@
       requestAnimationFrame(timesGo)
     }
   }
+  const titleList = Array.from(new Array(1000)).map((val, index) => index)
+
 </script>
 
 <style>
@@ -56,3 +60,6 @@
 <p>{nowTime}</p>
 <p>{millisecond}</p>
 <button on:click={handleTimeStart}>{isStop ? 'Start' : 'End'} Time</button>
+{#each titleList as title, index(title)}
+  <Title title={title}></Title>
+{/each}
